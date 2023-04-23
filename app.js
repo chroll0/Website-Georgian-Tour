@@ -25,8 +25,12 @@ window.addEventListener("scroll", function () {
   const navHeight = navbar.getBoundingClientRect().height;
   if (scrollHeight > 10) {
     navbar.classList.add("fixed-nav");
+    if (colorCounter != 0) {
+      navbar.classList.add("fixed-nav-black");
+    }
   } else {
     navbar.classList.remove("fixed-nav");
+    navbar.classList.remove("fixed-nav-black");
   }
   if (scrollHeight > 500) {
     topLink.classList.add("show-link");
@@ -48,9 +52,7 @@ scrollLinks.forEach(function (link) {
     const containerHeight = linksContainer.getBoundingClientRect().height;
     const fixedNav = navbar.classList.contains("fixed-nav");
     let position = element.offsetTop - navHeight;
-    if (!fixedNav) {
-      position -= navHeight;
-    }
+
     if (navHeight > 82) {
       position += containerHeight;
     }
@@ -179,10 +181,16 @@ logo.addEventListener("click", function () {
   if (colorCounter % 2 == 0) {
     document.body.style.backgroundColor = "#00141e";
     document.body.style.color = "white";
+    navbar.classList.add("fixed-nav-black");
+    logo.src = "img/georgia_logo_white.png";
+    navToggle.style.color = "var(--clr-white)";
     colorCounter += 1;
   } else {
     document.body.style.backgroundColor = "hsl(210, 36%, 96%)";
     document.body.style.color = "hsl(209, 61%, 16%)";
+    navbar.classList.remove("fixed-nav-black");
+    logo.src = "img/georgia_logo.png";
+    navToggle.style.color = "var(--clr-grey-1)";
     colorCounter -= 1;
   }
 });
